@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class GameSetting : MonoBehaviour
 {
-    public GameObject gameSettingUI;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject game_over_ui;
+    [SerializeField] private GameObject game_clear_ui;
+    [SerializeField] private GameObject game_setting_ui;
+
+    public void Game_Clear()
     {
-        
+        game_clear_ui.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Game_Setting()
     {
-        
+        game_setting_ui.SetActive(true);
     }
-    void gameSetting()
+
+    public void Game_Over()
     {
-        gameSettingUI.SetActive(true);
+        game_over_ui.SetActive(true);
     }
 }
