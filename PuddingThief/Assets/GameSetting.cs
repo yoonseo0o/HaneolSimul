@@ -7,7 +7,14 @@ public class GameSetting : MonoBehaviour
     [SerializeField] private GameObject game_over_ui;
     [SerializeField] private GameObject game_clear_ui;
     [SerializeField] private GameObject game_setting_ui;
-
+    public static GameSetting instance;
+    private void Awake()
+    {
+        if (!instance)
+        {
+            instance = this;
+        }
+    }
     public void Game_Clear()
     {
         game_clear_ui.SetActive(true);
@@ -22,4 +29,5 @@ public class GameSetting : MonoBehaviour
     {
         game_over_ui.SetActive(true);
     }
+
 }

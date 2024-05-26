@@ -9,6 +9,14 @@ public class CameraMovement : MonoBehaviour
     private float move_speed = 15.0f;
     private float move_distance = 5.6f;
 
+    public static CameraMovement instance;
+    private void Awake()
+    {
+        if (!instance)
+        {
+            instance = this;
+        }
+    }
     private void Start()
     {
         next_stage.onClick.AddListener(Next_Stage);

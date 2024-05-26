@@ -33,20 +33,9 @@ public class CurtainPuzzle : MonoBehaviour
 
         // 게임 오버, 다음 스테이지 이동 결정
         if (index == 0)
-            Next_Stage();
+            GameSetting.instance.Game_Clear();
         else
-            Game_Over();
-
-    }
-    // 임시 스테이지 변경 함수
-    void Next_Stage()
-    {
-        Debug.Log("Go_NextStage");
-    }
-    // 임시 게임 오버 함수
-    void Game_Over()
-    {
-        Debug.Log("GameOver");
+            GameSetting.instance.Game_Over();
 
     }
 }
