@@ -70,3 +70,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+PuddingThief/Library
+PuddingThief/Logs
+PuddingThief/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache
+PuddingThief/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
