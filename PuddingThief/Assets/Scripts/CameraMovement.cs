@@ -4,27 +4,29 @@ using UnityEngine.UI;
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] public Button left_move_button, right_move_button;
+    [SerializeField] private Button left_move_button, right_move_button;
+    [SerializeField] private Button next_stage;
     private float move_speed = 15.0f;
     private float move_distance = 5.6f;
 
-    void Start()
+    private void Start()
     {
+        next_stage.onClick.AddListener(Next_Stage);
         left_move_button.onClick.AddListener(Camera_Left_Move);
         right_move_button.onClick.AddListener(Camera_Right_Move);
     }
 
-    void Next_Stage()
+    private void Next_Stage()
     {
         Camera.main.transform.position += new Vector3(0, 20, 0);
     }
 
-    void Camera_Left_Move()
+    private void Camera_Left_Move()
     {
         StartCoroutine(Smooth_Move(Camera.main.transform.position + new Vector3(-move_distance, 0, 0)));
     }
 
-    void Camera_Right_Move()
+    private void Camera_Right_Move()
     {
         StartCoroutine(Smooth_Move(Camera.main.transform.position + new Vector3(move_distance, 0, 0)));
     }
