@@ -5,8 +5,21 @@ using UnityEngine.UI;
 
 public class CurtainPuzzle : MonoBehaviour
 {
-    [SerializeField] Button[] curtain_button;
-    [SerializeField] GameObject[] curtain_obj;
+    [SerializeField] private Button[] curtain_button;
+    
+    curtain_color color;
+    public enum curtain_color
+    {
+        blue,
+        red
+    }
+
+    private enum curtain_state
+    {
+        open,
+        close,
+        result
+    }
 
     // 시작시 각 버튼의 onclick에 함수를 입력함.
     private void Awake()
@@ -14,28 +27,31 @@ public class CurtainPuzzle : MonoBehaviour
         for (int i = 0; i < curtain_button.Length; i++)
         {
             int index = i;
-            curtain_button[i].onClick.AddListener(() => OnClick(index));
+            curtain_button[i].onClick.AddListener(() => OnClick((curtain_color)index));
         }
     }
-    public void OnClick(int index)
+    public void OnClick(curtain_color color)
     {
-        // 커튼 올라가면 모든 버튼 비활성화 시키고 
         for(int i=0;i<curtain_button.Length;i++)
             curtain_button[i].interactable = false;
 
-        StartCoroutine(Print_Result(index));
+        curtain_button[(int)color].transform.GetChild((int)curtain_state.close).gameObject.SetActive(true);
+        StartCoroutine(Print_Result(color, 1));
     }
-    IEnumerator Print_Result(int index)
+    IEnumerator Print_Result(curtain_color color, float wait_time)
     {
-        // n초 후 결과 출력 
-        yield return new WaitForSeconds(1);
-        curtain_obj[index].transform.GetChild(1).gameObject.SetActive(true);
+        yield return new WaitForSeconds(wait_time);
+        curtain_button[(int)color].transform.GetChild((int)curtain_state.result).gameObject.SetActive(true);
 
-        // 게임 오버, 다음 스테이지 이동 결정
-        if (index == 0)
-            GameSetting.instance.Game_Clear();
-        else
-            GameSetting.instance.Game_Over();
+        switch (color)
+        {
+            case curtain_color.blue:
+                GameSetting.instance.Game_Clear();
+                break;
 
+            case curtain_color.red:
+                GameSetting.instance.Game_Over();
+                break;
+        }
     }
 }
